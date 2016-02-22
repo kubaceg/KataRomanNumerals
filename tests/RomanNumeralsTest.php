@@ -2,24 +2,24 @@
 
 class RomanNumeralsTest extends PHPUnit_Framework_TestCase
 {
-	public function testRomanNumerals() {
+    /**
+     * @dataProvider romanNumeralsProvider
+     */
+	public function testRomanNumerals($arabic, $expected) {
 		$romanNumerals = new RomanNumerals();
-		$this->assertEquals("I", $romanNumerals->arabicToRoman(1));
-		$this->assertEquals("II", $romanNumerals->arabicToRoman(2));
-		$this->assertEquals("III", $romanNumerals->arabicToRoman(3));
-		$this->assertEquals("IV", $romanNumerals->arabicToRoman(4));
-		$this->assertEquals("V", $romanNumerals->arabicToRoman(5));
-		$this->assertEquals("VI", $romanNumerals->arabicToRoman(6));
-		$this->assertEquals("XIII", $romanNumerals->arabicToRoman(13));
-		$this->assertEquals("XVIII", $romanNumerals->arabicToRoman(18));
-		$this->assertEquals("XIX", $romanNumerals->arabicToRoman(19));
-		$this->assertEquals("MXXV", $romanNumerals->arabicToRoman(1025));
-		$this->assertEquals("MCMXCV", $romanNumerals->arabicToRoman(1995));
-		$this->assertEquals("MM", $romanNumerals->arabicToRoman(2000));
-		$this->assertEquals("MMMCCCXXXVIII", $romanNumerals->arabicToRoman(3338));
-		$this->assertEquals("MMXI", $romanNumerals->arabicToRoman(2011));
-		$this->assertEquals("MMXVI", $romanNumerals->arabicToRoman(2016));	
-		$this->assertEquals("MLXVI", $romanNumerals->arabicToRoman(1066));
-		$this->assertEquals("MCMLXXXIX", $romanNumerals->arabicToRoman(1989));		
+		$this->assertEquals($expected, $romanNumerals->arabicToRoman($arabic));
 	}
+
+    public function romanNumeralsProvider(){
+        return array(
+            array(1, "I"),
+            array(3, "III"),
+            array(13, "XIII"),
+            array(19, "XIX"),
+            array(3338, "MMMCCCXXXVIII"),
+            array(1989, "MCMLXXXIX"),
+            array(1995, "MCMXCV"),
+            array(1025, "MXXV")
+        );
+    }
 }
