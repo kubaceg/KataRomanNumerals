@@ -2,12 +2,27 @@
 
 class RomanNumeralsTest extends PHPUnit_Framework_TestCase
 {
+	/**
+	 * @var RomanNumerals
+	 */
+	private $romanNumerals;
+
+	public function setUp() {
+		$this->romanNumerals = new RomanNumerals();
+	}
+
     /**
      * @dataProvider romanNumeralsProvider
      */
-	public function testRomanNumerals($arabic, $expected) {
-		$romanNumerals = new RomanNumerals();
-		$this->assertEquals($expected, $romanNumerals->arabicToRoman($arabic));
+	public function testArabicToRoman($arabic, $roman) {
+		$this->assertEquals($roman, $this->romanNumerals->arabicToRoman($arabic));
+	}
+
+	/**
+	 * @dataProvider romanNumeralsProvider
+	 */
+	public function testRomanToArabic() {
+
 	}
 
     public function romanNumeralsProvider(){
