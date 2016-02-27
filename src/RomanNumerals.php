@@ -2,6 +2,9 @@
 
 class RomanNumerals
 {
+	/**
+	 * @var array
+	 */
 	private $arabicRomanMap = array(
 			1 => "I",
 			4 => "IV",
@@ -34,5 +37,23 @@ class RomanNumerals
 				return $this->arabicRomanMap[$key] . $this->arabicToRoman($number - $key);
 			}
 		}
+	}
+
+	/**
+	 * @param string $roman
+	 * @return int
+	 */
+	public function romanToArabic($roman) {
+		$arabicValue = 0;
+		
+		foreach (array_reverse($this->arabicRomanMap, true) as $key => $value) {
+			if(substr($roman, 0, strlen($value)) == $value) {
+				$newRoman = substr($roman, strlen($value));
+				$arabicValue = $arabicValue + $key + $this->romanToArabic($newRoman);
+				break;
+			}
+		}
+
+		return $arabicValue;
 	}
 }
