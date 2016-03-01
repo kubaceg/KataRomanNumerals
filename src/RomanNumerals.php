@@ -6,19 +6,19 @@ class RomanNumerals
 	 * @var array
 	 */
 	private $arabicRomanMap = array(
-			1 => "I",
-			4 => "IV",
-			5 => "V",
-			9 => "IX",
-			10 => "X",
-			40 => "XL",
-			50 => "L",
-			90 => "XC",
-			100 => "C",
-			400 => "CD",
-			500 => "D",
+			1000 => "M",
 			900 => "CM",
-			1000 => "M"
+			500 => "D",
+			400 => "CD",
+			100 => "C",
+			90 => "XC",
+			50 => "L",
+			40 => "XL",
+			10 => "X",
+			9 => "IX",
+			5 => "V",
+			4 => "IV",
+			1 => "I"
 		);
 
 	/**
@@ -30,8 +30,7 @@ class RomanNumerals
 			return $this->arabicRomanMap[$number];
 		}
 
-		$reverseMap = array_reverse($this->arabicRomanMap, true);
-		foreach ($reverseMap as $key => $value) {
+		foreach ($this->arabicRomanMap as $key => $value) {
 			$res = $number / $key;
 			if($res > 1) {
 				return $this->arabicRomanMap[$key] . $this->arabicToRoman($number - $key);
@@ -46,7 +45,7 @@ class RomanNumerals
 	public function romanToArabic($roman) {
 		$arabicValue = 0;
 		
-		foreach (array_reverse($this->arabicRomanMap, true) as $key => $value) {
+		foreach ($this->arabicRomanMap as $key => $value) {
 			if(substr($roman, 0, strlen($value)) == $value) {
 				$newRoman = substr($roman, strlen($value));
 				$arabicValue = $arabicValue + $key + $this->romanToArabic($newRoman);
